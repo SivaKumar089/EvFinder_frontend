@@ -1,0 +1,126 @@
+import React, { useEffect, useState } from "react";
+import {
+  FaMapMarkerAlt,
+  FaBolt,
+  FaCar,
+  FaBicycle,
+} from "react-icons/fa";
+
+import MiniMap from "./MiniMap";
+
+const StationCard = ({ station }) => {
+  const [placeName, setPlaceName] = useState("Loading...");
+
+  // Reverse geocoding — FREE API
+const getPlaceName = async (lat, lon) => {
+  try {
+    const res = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`
+    );
+    
+     
+    const data = await res.json();
+    const addr = data?.address;
+   
+   
+     
+    if (!addr) return "Unknown Location";
+    
+    
+    // Priority order for short names
+    const shortName =
+      addr.suburb;
+
+    return shortName || "Unknown Location";
+  } catch (err) {
+    return "Unknown Location";
+  }
+};
+
+
+  useEffect(() => {
+    (async () => {
+      const name = await getPlaceName(station.latitude, station.longitude);
+      setPlaceName(name);
+    })();
+  }, [station]);
+
+  // Open full map in new tab
+  const openFullMap = () => {
+    window.open(
+      `https://www.google.com/maps?q=${station.latitude},${station.longitude}`,
+      "_blank"
+    );
+  };
+
+  // Type Icons
+  const renderTypeIcons = () => {
+    if (station.type === "car")
+      return <FaCar className="text-blue-600 text-lg" />;
+
+    if (station.type === "bike")
+      return <FaBicycle className="text-green-600 text-lg" />;
+
+    return (
+      <div className="flex gap-1">
+        <FaCar className="text-blue-600 text-lg" />
+        <FaBicycle className="text-green-600 text-lg" />
+      </div>
+    );
+  };
+
+  return (
+    <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition border p-5 relative group">
+
+      {/* Mini Map Box (NO API KEY REQUIRED) */}
+      <div
+        className="absolute right-4 top-4 w-28 h-28 rounded-xl overflow-hidden shadow-lg cursor-pointer transform group-hover:scale-105 transition"
+        onClick={openFullMap}
+      >
+        <MiniMap lat={station.latitude} lon={station.longitude} />
+      </div>
+
+      {/* Text Content */}
+      <div className="pr-32">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-semibold text-gray-800">
+            {station.name}
+          </h2>
+          <FaBolt className="text-emerald-500 text-xl" />
+        </div>
+
+        {/* Location */}
+        <p className="text-gray-500 text-sm mt-2 flex items-center gap-2">
+          <FaMapMarkerAlt className="text-gray-400" />
+          {placeName}
+        </p>
+
+        {/* Type */}
+        <div className="flex items-center gap-2 mt-2">
+          <span className="font-medium text-gray-700">Type:</span>
+          {renderTypeIcons()}
+        </div>
+
+        {/* Price */}
+        <p className="text-gray-700 text-sm mt-2">
+          <span className="font-medium">Price:</span>{" "}
+          <span className="text-gray-900 font-semibold">
+            ₹{station.price}
+          </span>
+        </p>
+
+        {/* Status */}
+        <p className="text-gray-700 text-sm mt-2">
+          <span className="font-medium">Status:</span>{" "}
+          {station.is_active ? (
+            <span className="text-emerald-600 font-semibold">Active</span>
+          ) : (
+            <span className="text-red-500 font-semibold">Inactive</span>
+          )}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default StationCard;

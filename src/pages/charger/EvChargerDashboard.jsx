@@ -3,12 +3,7 @@ import { useNavigate } from "react-router-dom";
 const EvChargerDashboard = () => {
   const navigate=useNavigate()
 
-      function StationCard(){
-      navigate('/Stations')
-    }
-    function Editstaions(){
-      navigate('/evstations')
-    }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900 via-gray-900 to-black text-gray-100 p-8">
       <div className="flex justify-between items-center mb-8">
@@ -19,7 +14,7 @@ const EvChargerDashboard = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white/10 border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-green-500/20 transition" onClick={Editstaions}>
+        <div className="bg-white/10 border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-green-500/20 transition" onClick={()=>navigate('/evstations')}>
           <FaChartLine className="text-3xl text-green-400 mb-3" />
           <h3 className="text-xl font-semibold mb-1">Usage Analytics</h3>
           <p className="text-sm text-gray-400">
@@ -27,7 +22,7 @@ const EvChargerDashboard = () => {
           </p>
         </div>
 
-        <div className="bg-white/10 border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-green-500/20 transition" onClick={StationCard}>
+        <div className="bg-white/10 border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-green-500/20 transition" onClick={()=> navigate('/Stations')}>
           <FaPlug className="text-3xl text-green-400 mb-3" />
           <h3 className="text-xl font-semibold mb-1">Manage Chargers</h3>
           <p className="text-sm text-gray-400">

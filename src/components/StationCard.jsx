@@ -7,35 +7,39 @@ import {
 } from "react-icons/fa";
 
 import MiniMap from "./MiniMap";
+import { useNavigate } from "react-router-dom";
+ 
 
 const StationCard = ({ station }) => {
+  const navigate=useNavigate()
   const [placeName, setPlaceName] = useState("Loading...");
-
+  const role = localStorage.getItem("role");
   // Reverse geocoding — FREE API
-const getPlaceName = async (lat, lon) => {
-  try {
-    const res = await fetch(
-      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`
-    );
-    
-     
-    const data = await res.json();
-    const addr = data?.address;
-   
-   
-     
-    if (!addr) return "Unknown Location";
-    
-    
-    // Priority order for short names
-    const shortName =
-      addr.suburb;
+  const getPlaceName = async (lat, lon) => {
+    try {
+      const res = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`
+      );
 
-    return shortName || "Unknown Location";
-  } catch (err) {
-    return "Unknown Location";
-  }
-};
+
+      const data = await res.json();
+      const addr = data?.address;
+
+
+
+
+      if (!addr) return "Unknown Location";
+
+
+      // Priority order for short names
+      const shortName =
+        addr.suburb;
+
+      return shortName || "Unknown Location";
+    } catch (err) {
+      return "Unknown Location";
+    }
+  };
 
 
   useEffect(() => {
@@ -52,6 +56,7 @@ const getPlaceName = async (lat, lon) => {
       "_blank"
     );
   };
+
 
   // Type Icons
   const renderTypeIcons = () => {
@@ -79,6 +84,7 @@ const getPlaceName = async (lat, lon) => {
       >
         <MiniMap lat={station.latitude} lon={station.longitude} />
       </div>
+
 
       {/* Text Content */}
       <div className="pr-32">
@@ -108,6 +114,16 @@ const getPlaceName = async (lat, lon) => {
             ₹{station.price}
           </span>
         </p>
+        {role === "evowner" && (
+          <button
+            className=" absolute right-6 bottom-1 w-fit px-6 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg 
+               transition-all duration-300 font-medium"
+         onClick={() => navigate(`/booking/${station.id}`)}>
+            Book
+          </button>
+        )}
+
+
 
         {/* Status */}
         <p className="text-gray-700 text-sm mt-2">

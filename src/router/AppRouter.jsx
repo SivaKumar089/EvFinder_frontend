@@ -14,6 +14,11 @@ import EvStations from "../pages/charger/EvStations";
 import AddStation from "../pages/charger/AddStation";
 import EditStation from "../pages/charger/EditStation";
 import StationsMap from "../pages/owner/StationsMap";
+import CreateBooking from "../pages/Booking/CreateBooking";
+import MyBookings from "../pages/Booking/MyBookings";
+import StartPayment from "../pages/Booking/StartPayment";
+import PaymentHistory from "../pages/Booking/PaymentHistory";
+import Profile from "../components/profile";
 
 export default function AppRouter() {
   const role = localStorage.getItem("role");
@@ -32,6 +37,7 @@ export default function AppRouter() {
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/evowner" element={<EvOwnerDashboard />} />
         <Route path="/chargerowner" element={<EvChargerDashboard />} />
         <Route path="/Stations" element={<Stations />} />
@@ -46,6 +52,12 @@ export default function AppRouter() {
         <Route path="/add-station" element={<AddStation />} />
         <Route path="/edit-station/:id" element={<EditStation />} />
         <Route path="/stationmap" element={<StationsMap />} />
+
+
+        <Route path="/booking/:id" element={<CreateBooking />} />
+        <Route path="/my-bookings" element={<MyBookings />} />
+        <Route path="/payment/:id" element={<StartPayment />} />
+        <Route path="/payment-history" element={<PaymentHistory />} />
 
       </Routes>
     </Router>

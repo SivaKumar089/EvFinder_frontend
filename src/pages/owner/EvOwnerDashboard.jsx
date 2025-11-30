@@ -39,7 +39,7 @@ const EvOwnerDashboard = () => {
           </p>
         </div>
 
-        <div className="bg-white/10 border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-green-500/20 transition" onClick={()=>  navigate('/profile')}>
+        <div className="bg-white/10 border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-green-500/20 transition">
           <FaUserCircle className="text-3xl text-green-400 mb-3" />
           <h3 className="text-xl font-semibold mb-1">Profile</h3>
           <p className="text-sm text-gray-400">

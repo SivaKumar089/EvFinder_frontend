@@ -18,7 +18,7 @@ import CreateBooking from "../pages/Booking/CreateBooking";
 import MyBookings from "../pages/Booking/MyBookings";
 import StartPayment from "../pages/Booking/StartPayment";
 import PaymentHistory from "../pages/Booking/PaymentHistory";
-import Profile from "../components/profile";
+
 
 export default function AppRouter() {
   const role = localStorage.getItem("role");
@@ -37,7 +37,7 @@ export default function AppRouter() {
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<Profile />} />
+      
         <Route path="/evowner" element={<EvOwnerDashboard />} />
         <Route path="/chargerowner" element={<EvChargerDashboard />} />
         <Route path="/Stations" element={<Stations />} />

@@ -3,7 +3,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaSignInAlt, FaExclamationCircle, FaCheckCircle } from "react-icons/fa";
 import { motion } from "framer-motion";
-import axios from "axios";
+import axios from "../utils/axios";
 import { useState } from "react";
 
 const Login = () => {
@@ -31,7 +31,7 @@ const Login = () => {
 
     setLoading(true);
     try {
-      const res = await axios.post("http://127.0.0.1:8000/api/login/", {
+      const res = await axios.post("/login/", {
         email_or_username,
         password,
       });

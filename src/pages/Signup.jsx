@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "../utils/axios";
 import { motion } from "framer-motion";
 import { FaExclamationCircle, FaCheckCircle } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
@@ -42,7 +42,7 @@ const Signup = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post("http://127.0.0.1:8000/api/signup-send-otp/", { email });
+      const res = await axios.post("/signup-send-otp/", { email });
       setMessage(res.data.message);
       setOtpSent(true);
       toast.success("OTP sent successfully!");
@@ -63,7 +63,7 @@ const Signup = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post("http://127.0.0.1:8000/api/emailverify-otp/", {
+      const res = await axios.post("/emailverify-otp/", {
         email,
         code,
       });
@@ -101,7 +101,7 @@ const Signup = () => {
 
     try {
       setLoading(true);
-      await axios.post("http://127.0.0.1:8000/api/signup/", {
+      await axios.post("/signup/", {
         username,
         email,
         password,

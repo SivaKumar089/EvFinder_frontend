@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "../utils/axios"
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
@@ -30,7 +30,7 @@ const ForgotPassword = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post("http://127.0.0.1:8000/api/send-otp/", { email });
+      const res = await axios.post("/send-otp/", { email });
       setMessage(res.data.message);
       toast.success("OTP sent successfully!");
       setOtpSent(true);
@@ -49,7 +49,7 @@ const ForgotPassword = () => {
     }
     try {
       setLoading(true);
-      const res = await axios.post("http://127.0.0.1:8000/api/verify-otp/", { email, code: otp });
+      const res = await axios.post("/verify-otp/", { email, code: otp });
       toast.success(res.data.message || "OTP verified successfully!");
       setOtpVerified(true);
     } catch (err) {
@@ -74,7 +74,7 @@ const ForgotPassword = () => {
 
     try {
       setLoading(true);
-      const res = await axios.put("http://127.0.0.1:8000/api/forgot-password/", {
+      const res = await axios.put("/forgot-password/", {
         email,
         new_password: newPassword,
       });

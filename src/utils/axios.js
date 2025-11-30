@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://evfinder-backend.onrender.com/api",
+  baseURL: import.meta.env.VITE_API_BASE_URL,
 });
 
 // Token automatically added

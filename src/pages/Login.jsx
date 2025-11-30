@@ -14,7 +14,7 @@ const Login = () => {
   const [identifierError, setIdentifierError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
-
+ 
   const handleLogin = async (e) => {
     e.preventDefault();
     setIdentifierError("");
@@ -35,14 +35,14 @@ const Login = () => {
         email_or_username,
         password,
       });
-      
-      
+
+
       // ✅ Get all values properly from the response
       const { access, refresh } = res.data;
       const { role } = res.data.user;
-     
-      
-      
+
+
+
       // ✅ Save them in localStorage
       localStorage.setItem("access", access);
       localStorage.setItem("refresh", refresh);
@@ -51,8 +51,8 @@ const Login = () => {
       toast.success("✅ Login successful!");
 
       // ✅ Add a small delay to show the toast, then navigate
-     
-      
+
+
       setTimeout(() => {
         if (role === "evowner") navigate("/evowner");
         else if (role === "chargerowner") navigate("/chargerowner");

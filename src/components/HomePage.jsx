@@ -1,93 +1,130 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaBolt, FaMapMarkerAlt, FaWallet } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-100 to-white text-gray-900">
-      {/* Navbar */}
-      <nav className="flex justify-between items-center px-8 py-4 shadow-md bg-white fixed w-full top-0 z-50">
-        <h1 className="text-2xl font-bold text-sky-600">⚡ ChargeMate</h1>
-        <ul className="hidden md:flex gap-6 font-medium">
-          <li className="hover:text-sky-600 cursor-pointer">Home</li>
-          <li className="hover:text-sky-600 cursor-pointer">Stations</li>
-          <li className="hover:text-sky-600 cursor-pointer">About</li>
-          <li className="hover:text-sky-600 cursor-pointer">Contact</li>
-        </ul>
-        <button className="bg-sky-600 text-white px-4 py-2 rounded-lg hover:bg-sky-700">
-          Login
-        </button>
-      </nav>
+  const navigate = useNavigate();
 
-      {/* Hero Section */}
-      <section className="pt-32 text-center md:text-left flex flex-col md:flex-row items-center justify-center gap-10 px-8">
+  return (
+    <div
+      className="min-h-screen relative overflow-hidden 
+      bg-gradient-to-br from-green-900 via-gray-900 to-black p-6 
+      text-white flex items-center justify-center"
+    >
+      {/* FLOATING GLOW ORBS */}
+      <div className="absolute -top-40 -left-40 w-96 h-96 bg-green-500/20 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute bottom-0 -right-40 w-96 h-96 bg-emerald-400/10 rounded-full blur-3xl animate-pulse" />
+
+      {/* MAIN CARD */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.9 }}
+        className="relative max-w-6xl w-full grid md:grid-cols-2 gap-14
+        bg-white/5 backdrop-blur-2xl rounded-3xl p-10
+        shadow-[0_0_60px_rgba(34,197,94,0.15)]
+        border border-white/10"
+      >
+        {/* LEFT CONTENT */}
         <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
-          className="md:w-1/2"
+          initial={{ x: -40, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
         >
-          <h1 className="text-5xl font-bold mb-4 text-sky-700">
-            Find & Book EV Chargers Instantly ⚡
+          <h1 className="text-5xl md:text-6xl font-extrabold leading-tight">
+            Power Your{" "}
+            <span className="bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">
+              EV Journey
+            </span>
+            <br /> Smarter ⚡
           </h1>
-          <p className="text-lg mb-6 text-gray-700">
-            Locate nearby charging stations, check slot availability, and
-            charge your vehicle hassle-free.
+
+          <p className="mt-6 text-lg text-gray-300 max-w-xl">
+            Find nearby EV charging stations, check live availability,
+            reserve slots instantly, and pay securely — all from one platform.
           </p>
-          <button className="bg-sky-600 text-white px-6 py-3 rounded-lg hover:bg-sky-700 transition">
-            🔍 Find Chargers Near You
-          </button>
+
+          {/* CTA BUTTONS */}
+          <div className="mt-10 flex gap-5 flex-wrap">
+            <button
+              onClick={() => navigate("/login")}
+              className="relative px-8 py-4 rounded-xl bg-green-500 text-black font-semibold
+              shadow-[0_0_30px_rgba(34,197,94,0.6)]
+              hover:shadow-[0_0_60px_rgba(34,197,94,0.9)]
+              hover:scale-110 transition-all duration-300"
+            >
+              Login
+            </button>
+
+            <button
+              onClick={() => navigate("/signup")}
+              className="px-8 py-4 rounded-xl border border-green-400 text-green-400 font-semibold
+              hover:bg-green-400 hover:text-black hover:scale-110 transition-all duration-300"
+            >
+              Create Account
+            </button>
+          </div>
         </motion.div>
 
-        <motion.img
-          
-          alt="EV Charger"
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
-          className="md:w-1/2 w-80"
-        />
-      </section>
-
-      {/* Features Section */}
-      <section className="py-20 bg-white">
-        <h2 className="text-center text-3xl font-bold mb-10 text-sky-700">
-          Why Choose ChargeMate?
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-8 max-w-6xl mx-auto">
-          <FeatureCard
-            icon={<FaMapMarkerAlt size={40} />}
-            title="Real-time Availability"
-            desc="Check charger availability instantly before you arrive."
+        {/* RIGHT FEATURES */}
+        <motion.div
+          initial={{ x: 40, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
+          className="grid grid-cols-1 gap-6"
+        >
+          <Feature
+            icon={<FaMapMarkerAlt />}
+            title="Live Station Map"
+            desc="Discover nearby charging stations with real-time availability."
           />
-          <FeatureCard
-            icon={<FaWallet size={40} />}
+          <Feature
+            icon={<FaWallet />}
             title="Secure Payments"
-            desc="Book your slot and pay online safely in seconds."
+            desc="Pay online safely with trusted and fast payment systems."
           />
-          <FeatureCard
-            icon={<FaBolt size={40} />}
-            title="Fast & Reliable"
-            desc="Connect, charge, and get back on the road quickly."
+          <Feature
+            icon={<FaBolt />}
+            title="Fast Charging"
+            desc="High-speed chargers to get you back on the road quickly."
           />
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-gray-300 text-center py-6 mt-10">
-        <p>© 2025 ChargeMate. All rights reserved.</p>
-        <p className="text-sm mt-2">Built with ❤️ by Siva Kumar</p>
-      </footer>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
 
-function FeatureCard({ icon, title, desc }) {
+function Feature({ icon, title, desc }) {
   return (
-    <div className="bg-sky-50 p-8 rounded-2xl shadow hover:shadow-lg transition text-center">
-      <div className="text-sky-600 mb-4 flex justify-center">{icon}</div>
-      <h3 className="font-semibold text-xl mb-2">{title}</h3>
-      <p className="text-gray-600">{desc}</p>
-    </div>
+    <motion.div
+      whileHover={{ scale: 1.08, y: -6 }}
+      transition={{ type: "spring", stiffness: 180 }}
+      className="group relative overflow-hidden rounded-2xl p-6
+      bg-gradient-to-br from-white/10 to-white/5
+      border border-white/10 backdrop-blur-xl
+      shadow-[0_0_30px_rgba(0,0,0,0.4)]"
+    >
+      {/* GLOW EFFECT */}
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition
+        bg-gradient-to-r from-green-400/20 to-emerald-400/10 blur-2xl"
+      />
+
+      <div className="relative z-10 flex gap-4 items-start">
+        <motion.div
+          animate={{ y: [0, -6, 0] }}
+          transition={{ repeat: Infinity, duration: 3 }}
+          className="text-green-400 text-3xl"
+        >
+          {icon}
+        </motion.div>
+
+        <div>
+          <h3 className="font-semibold text-lg">{title}</h3>
+          <p className="text-gray-300 text-sm mt-1">{desc}</p>
+        </div>
+      </div>
+    </motion.div>
   );
 }

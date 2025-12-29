@@ -29,14 +29,16 @@ const EvChargerDashboard = () => {
             Add, update or deactivate your charging stations.
           </p>
         </div>
-
-        <div className="bg-white/10 border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-green-500/20 transition">
-          <FaUsers className="text-3xl text-green-400 mb-3" />
-          <h3 className="text-xl font-semibold mb-1">Customer Reviews</h3>
+        <div className="bg-white/10 border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-green-500/20 transition" onClick={()=> navigate('/summary')}>
+          <FaPlug className="text-3xl text-green-400 mb-3" />
+          <h3 className="text-xl font-semibold mb-1">Bookings</h3>
           <p className="text-sm text-gray-400">
-            View and respond to feedback from EV users.
+            
           </p>
         </div>
+       
+
+
       </div>
     </div>
   );

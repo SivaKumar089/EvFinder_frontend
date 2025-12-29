@@ -18,6 +18,8 @@ import CreateBooking from "../pages/Booking/CreateBooking";
 import MyBookings from "../pages/Booking/MyBookings";
 import StartPayment from "../pages/Booking/StartPayment";
 import PaymentHistory from "../pages/Booking/PaymentHistory";
+import OwnerSummary from "../pages/charger/OwnerSummary";
+import OwnerBookings from "../pages/charger/OwnerBookings";
 
 
 export default function AppRouter() {
@@ -52,6 +54,8 @@ export default function AppRouter() {
         <Route path="/add-station" element={<AddStation />} />
         <Route path="/edit-station/:id" element={<EditStation />} />
         <Route path="/stationmap" element={<StationsMap />} />
+        <Route path="/summary" element={<OwnerSummary />} />
+        <Route path="/bookings/:id" element={<OwnerBookings />} />
 
 
         <Route path="/booking/:id" element={<CreateBooking />} />

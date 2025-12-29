@@ -82,11 +82,8 @@ const Login = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-6"
         >
-          <FaSignInAlt className="mx-auto text-green-400 text-5xl mb-3" />
-          <h2 className="text-3xl font-extrabold text-green-400">Welcome Back</h2>
-          <p className="text-gray-300 text-sm mt-1">
-            Login to continue your journey
-          </p>
+          <h2 className="text-3xl font-extrabold text-green-400">Login</h2>
+        
         </motion.div>
 
         <form onSubmit={handleLogin} className="space-y-5">
@@ -158,23 +155,22 @@ const Login = () => {
         </form>
 
         {/* Links */}
-        <div className="text-center text-sm text-gray-400 mt-6 space-y-2">
+        <div className="text-center flex justify-between text-sm text-gray-400 mt-6 space-y-2">
           <p>
-            Forgot your password?{" "}
+            
             <a
               href="/forgot-password"
               className="text-green-400 font-medium hover:underline"
             >
-              Reset here
+               Forgot your password?
             </a>
           </p>
           <p>
-            Don’t have an account?{" "}
-            <a
+                      <a
               href="/signup"
               className="text-green-400 font-medium hover:underline"
             >
-              Sign up
+                Don’t have an account?
             </a>
           </p>
         </div>

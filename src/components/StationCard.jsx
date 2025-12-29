@@ -59,83 +59,90 @@ const StationCard = ({ station }) => {
 
 
   // Type Icons
-  const renderTypeIcons = () => {
-    if (station.type === "car")
-      return <FaCar className="text-blue-600 text-lg" />;
-
-    if (station.type === "bike")
-      return <FaBicycle className="text-green-600 text-lg" />;
-
+const renderTypeIcons = () => {
+  if (station.type === "bike") return <FaBicycle className="text-green-400 text-xl" />;
+  if (station.type === "car") return <FaCar className="text-blue-400 text-xl" />;
+  if (station.type === "both")
     return (
-      <div className="flex gap-1">
-        <FaCar className="text-blue-600 text-lg" />
-        <FaBicycle className="text-green-600 text-lg" />
+      <div className="flex gap-2">
+        <FaBicycle className="text-green-400 text-xl" />
+        <FaCar className="text-blue-400 text-xl" />
       </div>
     );
-  };
+};
+
 
   return (
-    <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition border p-5 relative group">
+<div className="relative bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-3xl shadow-xl hover:shadow-emerald-500/20 hover:scale-[1.01] transition duration-300">
 
-      {/* Mini Map Box (NO API KEY REQUIRED) */}
-      <div
-        className="absolute right-4 top-4 w-28 h-28 rounded-xl overflow-hidden shadow-lg cursor-pointer transform group-hover:scale-105 transition"
-        onClick={openFullMap}
-      >
-        <MiniMap lat={station.latitude} lon={station.longitude} />
-      </div>
+  {/* Mini Map Box */}
+  <div
+    onClick={openFullMap}
+    className="absolute top-6 right-6 w-32 h-32 rounded-xl overflow-hidden shadow-md border border-white/20 cursor-pointer hover:scale-105 transition"
+  >
+    <MiniMap lat={station.latitude} lon={station.longitude} />
+  </div>
 
+  {/* Card Content */}
+  <div className="pr-40 space-y-3">
 
-      {/* Text Content */}
-      <div className="pr-32">
-        <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-gray-800">
-            {station.name}
-          </h2>
-          <FaBolt className="text-emerald-500 text-xl" />
-        </div>
+    {/* Name + Bolt */}
+    <div className="flex items-center justify-between">
+      <h2 className="text-xl font-bold text-gray-600 tracking-wide">
+        {station.name}
+      </h2>
+      <FaBolt className="text-emerald-400 text-2xl drop-shadow-sm" />
+    </div>
 
-        {/* Location */}
-        <p className="text-gray-500 text-sm mt-2 flex items-center gap-2">
-          <FaMapMarkerAlt className="text-gray-400" />
-          {placeName}
-        </p>
+    {/* Location */}
+    <p className="text-gray-600 text-sm flex items-center gap-2">
+      <FaMapMarkerAlt className="text-emerald-400" />
+      {placeName}
+    </p>
 
-        {/* Type */}
-        <div className="flex items-center gap-2 mt-2">
-          <span className="font-medium text-gray-700">Type:</span>
-          {renderTypeIcons()}
-        </div>
-
-        {/* Price */}
-        <p className="text-gray-700 text-sm mt-2">
-          <span className="font-medium">Price:</span>{" "}
-          <span className="text-gray-900 font-semibold">
-            ₹{station.price}
-          </span>
-        </p>
-        {role === "evowner" && (
-          <button
-            className=" absolute right-6 bottom-1 w-fit px-6 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg 
-               transition-all duration-300 font-medium"
-         onClick={() => navigate(`/booking/${station.id}`)}>
-            Book
-          </button>
-        )}
-
-
-
-        {/* Status */}
-        <p className="text-gray-700 text-sm mt-2">
-          <span className="font-medium">Status:</span>{" "}
-          {station.is_active ? (
-            <span className="text-emerald-600 font-semibold">Active</span>
-          ) : (
-            <span className="text-red-500 font-semibold">Inactive</span>
-          )}
-        </p>
+    {/* Type */}
+    <div className="flex gap-2 items-center mt-1">
+      <span className="font-medium text-gray-600">Type:</span>
+      <div className="flex gap-2 items-center text-lg">
+        {renderTypeIcons()}
       </div>
     </div>
+
+    {/* Price */}
+    <div className="flex gap-2 items-center">
+      <span className="text-gray-600 font-medium">Price:</span>
+      <span className="text-emerald-300 font-bold text-lg">
+        ₹{station.price}
+      </span>
+    </div>
+
+    {/* Status */}
+    <div className="flex gap-2 items-center">
+      <span className="text-gray-600 font-medium">Status:</span>
+      {station.is_active ? (
+        <span className="text-emerald-500 font-semibold bg-emerald-500/20 px-2 py-1 rounded-lg text-sm">
+          Active
+        </span>
+      ) : (
+        <span className="text-red-500 font-semibold bg-red-500/20 px-2 py-1 rounded-lg text-sm">
+          Inactive
+        </span>
+      )}
+    </div>
+
+    {/* Book Button */}
+    {role === "evowner" && (
+      <button
+        onClick={() => navigate(`/booking/${station.id}`)}
+        className="mt-4 px-6 py-2 w-fit bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl
+        text-white font-semibold shadow-md hover:shadow-blue-400/40 hover:scale-[1.03] transition"
+      >
+        Book Now 🚗⚡
+      </button>
+    )}
+  </div>
+</div>
+
   );
 };
 

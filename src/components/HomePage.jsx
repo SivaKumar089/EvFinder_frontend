@@ -37,7 +37,7 @@ export default function HomePage() {
             <span className="bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">
               EV Journey
             </span>
-            <br /> Smarter ⚡
+            <br /> Smarter
           </h1>
 
           <p className="mt-6 text-lg text-gray-300 max-w-xl">
